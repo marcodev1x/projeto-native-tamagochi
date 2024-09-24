@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -70,13 +70,17 @@ const AddPetScreen: React.FC = () => {
                 onChangeText={setName}
             />
             <View style={styles.buttonContainer}>
-                <Button title="Escolher Imagem" onPress={handlePickImage} />
+                <TouchableOpacity style={styles.secondaryButton} onPress={handlePickImage}>
+                    <Text style={styles.secondaryButtonText}>Escolher Imagem</Text>
+                </TouchableOpacity>
             </View>
             {imageUri && (
                 <Image source={{ uri: imageUri }} style={styles.image} />
             )}
             <View style={styles.buttonContainer}>
-                <Button title="Cadastrar Pet" onPress={handleSubmit} />
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                    <Text style={styles.buttonText}>Cadastrar Pet</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -108,7 +112,29 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     buttonContainer: {
-        marginVertical: 10, // Espaçamento entre os botões
+        marginVertical: 16,
+    },
+    button: {
+        backgroundColor: '#a140ff',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
+    },
+    secondaryButton: {
+        backgroundColor: '#fff',
+        borderColor: '#a140ff',
+        borderWidth: 2,
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    secondaryButtonText: {
+        color: '#a140ff',
+        fontSize: 18,
     },
 });
 

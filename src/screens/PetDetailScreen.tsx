@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 import { Pet } from '../models/Pet';
-import { getPets, updatePet } from '../db/storage'; // Importa funções do storage
+import { getPets, updatePet } from '../db/storage';
 
 const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, navigation }) => {
-    const { petId } = route.params; // Recebe o ID do pet
+    const { petId } = route.params;
     const [updatedPet, setUpdatedPet] = useState<Pet | null>(null);
 
     useEffect(() => {
         console.log(`PetDetailScreen: petId recebido = ${petId}`);
 
-        // Função para carregar o pet do AsyncStorage
         const loadPet = async () => {
             try {
                 const pets = await getPets();
@@ -48,11 +47,11 @@ const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, na
                     fun: newFun,
                 };
 
-                updatePet(updatedPet); // Atualiza o pet no AsyncStorage
+                updatePet(updatedPet);
 
                 return updatedPet;
             });
-        }, 3600000); // Atualiza a cada 1 hora
+        }, 3600000);
 
         return () => clearInterval(interval);
     }, [petId]);
@@ -70,7 +69,7 @@ const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, na
             if (!prev) return null;
 
             const updated = { ...prev, hunger: Math.min(prev.hunger + 10, 100) };
-            updatePet(updated); // Salva no AsyncStorage
+            updatePet(updated);
             return updated;
         });
     };
@@ -80,7 +79,7 @@ const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, na
             if (!prev) return null;
 
             const updated = { ...prev, sleep: Math.min(prev.sleep + 10, 100) };
-            updatePet(updated); // Salva no AsyncStorage
+            updatePet(updated);
             return updated;
         });
     };
@@ -90,10 +89,10 @@ const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, na
             if (!prev) return null;
 
             const updated = { ...prev, fun: Math.min(prev.fun + 20, 100) };
-            updatePet(updated); // Salva no AsyncStorage
+            updatePet(updated);
             return updated;
         });
-        navigation.navigate('Encontre o par'); // Navega para a tela "Jogo da Adivinhação"
+        navigation.navigate('Encontre o par');
     };
 
     return (
@@ -105,13 +104,19 @@ const PetDetailScreen: React.FC<{ route: any; navigation: any; }> = ({ route, na
             <Text>Diversão: {updatedPet.fun}</Text>
             <Text>Status: {calculateStatus(updatedPet.hunger, updatedPet.sleep, updatedPet.fun)}</Text>
             <View style={styles.buttonContainer}>
-                <Button title="Alimentar" onPress={handleFeed} />
+                <TouchableOpacity style={styles.secondaryButton} onPress={handleFeed}>
+                    <Text style={styles.secondaryButtonText}>Alimentar</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Dormir" onPress={handleSleep} />
+                <TouchableOpacity style={styles.secondaryButton} onPress={handleSleep}>
+                    <Text style={styles.secondaryButtonText}>Dormir</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Brincar" onPress={handlePlay} />
+                <TouchableOpacity style={styles.secondaryButton} onPress={handlePlay}>
+                    <Text style={styles.secondaryButtonText}>Brincar</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -146,7 +151,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttonContainer: {
-        marginVertical: 10, // Espaçamento para cima e para baixo
+        marginVertical: 10,
+    },
+    secondaryButton: {
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: '#a140ff',
+        borderRadius: 5,
+        padding: 10,
+        width: '80%',
+        alignItems: 'center',
+    },
+    secondaryButtonText: {
+        color: '#a140ff',
+        fontWeight: 'bold',
     },
 });
 

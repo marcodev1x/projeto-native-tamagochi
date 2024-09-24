@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function GuessNumberScreen() {
     const [randomNumber, setRandomNumber] = useState<number>(Math.floor(Math.random() * 100) + 1);
@@ -39,10 +39,14 @@ export default function GuessNumberScreen() {
                 onChangeText={setGuess}
             />
             <View style={styles.buttonContainer}>
-                <Button title="Fazer Palpite" onPress={handleGuess} />
+                <TouchableOpacity style={styles.button} onPress={handleGuess}>
+                    <Text style={styles.buttonText}>Fazer Palpite</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Resetar Jogo" onPress={resetGame} color="red" />
+                <TouchableOpacity style={[styles.button, styles.resetButton]} onPress={resetGame}>
+                    <Text style={styles.buttonText}>Resetar Jogo</Text>
+                </TouchableOpacity>
             </View>
             <Text style={styles.message}>{message}</Text>
         </View>
@@ -69,7 +73,19 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     buttonContainer: {
-        marginVertical: 10, // Espaçamento entre os botões
+        marginVertical: 10,
+    },
+    button: {
+        backgroundColor: '#a140ff',
+        padding: 10,
+        borderRadius: 5,
+    },
+    resetButton: {
+        backgroundColor: 'red',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
     },
     message: {
         fontSize: 18,

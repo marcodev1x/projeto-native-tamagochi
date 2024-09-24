@@ -7,7 +7,7 @@ import AddPetScreen from '../screens/AddPetScreen';
 import PetDetailScreen from '../screens/PetDetailScreen';
 import FindThePairs from "../screens/FindThePairs";
 import GuessNumberScreen from "../screens/GuessNumberScreen";
-import { Ionicons } from '@expo/vector-icons'; //Commit para adicionar ícones
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,7 +24,12 @@ function PetStack() {
 export default function AppNavigator() {
     return (
         <NavigationContainer>
-            <Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={{
+                    tabBarActiveTintColor: '#a140ff',
+                    tabBarInactiveTintColor: '#808080',
+                }}
+            >
                 <Tab.Screen
                     name="Pets"
                     component={PetStack}

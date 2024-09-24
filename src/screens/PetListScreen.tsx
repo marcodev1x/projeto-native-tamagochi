@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Button, StyleSheet, TextInput, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TextInput, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Pet {
@@ -73,8 +73,12 @@ export default function PetListScreen({ navigation }: any) {
                                     onChangeText={setUpdatedName}
                                 />
                                 <View style={styles.buttonContainer}>
-                                <Button title="Salvar" onPress={() => handleUpdatePet(item)} />
-                                <Button title="Cancelar" onPress={() => setEditingPet(null)} />
+                                    <TouchableOpacity style={styles.editButton} onPress={() => handleUpdatePet(item)}>
+                                        <Text style={styles.buttonText}>Salvar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.cancelButton} onPress={() => setEditingPet(null)}>
+                                        <Text style={styles.buttonText}>Cancelar</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         ) : (
@@ -84,8 +88,12 @@ export default function PetListScreen({ navigation }: any) {
                                 <Text>Sono: {item.sleep}</Text>
                                 <Text>Diversão: {item.fun}</Text>
                                 <View style={styles.buttonContainer}>
-                                    <Button title="Editar" onPress={() => setEditingPet(item)} />
-                                    <Button title="Excluir" onPress={() => handleDeletePet(item.id)} />
+                                    <TouchableOpacity style={styles.editButton} onPress={() => setEditingPet(item)}>
+                                        <Text style={styles.buttonText}>Editar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeletePet(item.id)}>
+                                        <Text style={styles.buttonText}>Excluir</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         )}
@@ -129,14 +137,35 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         marginTop: 10,
-        gap: 10
+        gap: 10,
+    },
+    editButton: {
+        backgroundColor: '#a140ff',
+        padding: 10,
+        borderRadius: 8,
+        flex: 1,
+    },
+    deleteButton: {
+        backgroundColor: '#cccccc',
+        padding: 10,
+        borderRadius: 8,
+        flex: 1,
+    },
+    cancelButton: {
+        backgroundColor: '#a140ff',
+        padding: 10,
+        borderRadius: 8,
+        flex: 1,
+    },
+    buttonText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     updateButton: {
-        backgroundColor: '#007bff',
-        padding: 15,
+        backgroundColor: '#a140ff',
+        padding: 16,
         borderRadius: 8,
         alignItems: 'center',
         marginTop: 20,

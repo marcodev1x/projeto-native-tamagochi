@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const generateCards = () => {
     const cards = ['🍎', '🍌', '🍓', '🍉'];
@@ -68,7 +68,9 @@ export default function FindThePairs() {
                 ))}
             </View>
             <View style={styles.footer}>
-                <Button title="Resetar Jogo" onPress={resetGame} />
+                <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
+                    <Text style={styles.resetButtonText}>Resetar Jogo</Text>
+                </TouchableOpacity>
                 <Text style={styles.matchesText}>Pares encontrados: {matches}</Text>
             </View>
         </View>
@@ -110,6 +112,16 @@ const styles = StyleSheet.create({
     },
     footer: {
         alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: '#a140ff',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+    },
+    resetButtonText: {
+        color: 'white',
+        fontSize: 18,
     },
     matchesText: {
         fontSize: 18,
