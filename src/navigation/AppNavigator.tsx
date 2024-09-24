@@ -7,7 +7,7 @@ import AddPetScreen from '../screens/AddPetScreen';
 import PetDetailScreen from '../screens/PetDetailScreen';
 import FindThePairs from "../screens/FindThePairs";
 import GuessNumberScreen from "../screens/GuessNumberScreen";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; //Commit para adicionar ícones
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
