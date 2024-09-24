@@ -7,6 +7,7 @@ import AddPetScreen from '../screens/AddPetScreen';
 import PetDetailScreen from '../screens/PetDetailScreen';
 import FindThePairs from "../screens/FindThePairs";
 import GuessNumberScreen from "../screens/GuessNumberScreen";
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,10 +25,42 @@ export default function AppNavigator() {
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="Pets" component={PetStack} />
-                <Tab.Screen name="Add Pet" component={AddPetScreen} />
-                <Tab.Screen name="Encontre o par" component={FindThePairs} />
-                <Tab.Screen name="Jogo da adivinhação" component={GuessNumberScreen} />
+                <Tab.Screen
+                    name="Pets"
+                    component={PetStack}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="paw" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Add Pet"
+                    component={AddPetScreen}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="add-circle" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Encontre o par"
+                    component={FindThePairs}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="game-controller" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Jogo da adivinhação"
+                    component={GuessNumberScreen}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="help-circle" color={color} size={size} />
+                        ),
+                    }}
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );
